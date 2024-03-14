@@ -14,3 +14,25 @@ First, please export the following environment variables:
 # So that the python script doesn't crash
 export PYTHONPATH=$(pwd)
 ```
+
+After that, you can run the following commands:
+
+```bash
+# Init Venv
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the main script
+python src/main.py
+```
+
+## How to contribute
+
+If you want to contribute to this project, please open an issue or a pull request. We are open to new ideas and suggestions.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
