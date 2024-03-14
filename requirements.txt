@@ -1,0 +1,6 @@
+termcolor
+g4f
+PyExecJS
+undetected_chromedriver
+platformdirs
+Brotli
