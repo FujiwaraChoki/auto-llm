@@ -1,6 +1,9 @@
 import logging
 import subprocess as sp
 
+import subprocess as sp
+import logging
+
 class Automation:
     def __init__(self):
         """
@@ -26,19 +29,24 @@ class Automation:
         """
 
         logging.info(f"Running the command: {command}")
-        result = sp.run("powershell -c '" + command.replace("'", "\"") + "'", shell=True, check=True, stdout=sp.PIPE, stderr=sp.PIPE)
 
-        if result.returncode != 0:
-            logging.error(f"Error: {result.stderr.decode('utf-8')}")
+        # Send the command to the powershell
+        result = sp.run("powershell " + command, shell=True, text=True, capture_output=True)
+
+        # Capture output and error streams
+        stdout, stderr = result.stdout, result.stderr
+
+        # Check if the command was successful
+        if not stderr:
+            return {
+                "success": True,
+                "message": stdout
+            }
+        else:
             return {
                 "success": False,
-                "message": result.stderr.decode("utf-8")
+                "message": stderr
             }
-        
-        return {
-            "success": True,
-            "message": result.stdout.decode("utf-8")
-        }
     
     def run_commands(self, commands: list) -> list:
         """
@@ -54,12 +62,9 @@ class Automation:
         ok_dict = {}
 
         for command in commands:
-            ok_dict["success"] = False
-
-            while not ok_dict["success"]:
-                result = self.run(command)
-                ok_dict["success"] = result["success"]
-                ok_dict["message"] = result["message"]
+            result = self.run(command)
+            ok_dict["success"] = result["success"]
+            ok_dict["message"] = result["message"]
 
             results.append(result)
         

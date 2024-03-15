@@ -1,11 +1,24 @@
 import logging
 
 from termcolor import colored
+
 try:
     from classes.LLM import LLM
     from classes.Automation import Automation
 except ModuleNotFoundError:
     logging.error(colored("Please set the PYTHONPATH environment variable to the project root directory.", "red"))
+
+def print_ascii_art():
+    print(colored(r"""
+    
+                _        _      _      __  __ 
+     /\        | |      | |    | |    |  \/  |
+    /  \  _   _| |_ ___ | |    | |    | \  / |
+   / /\ \| | | | __/ _ \| |    | |    | |\/| |
+  / ____ \ |_| | || (_) | |____| |____| |  | |
+ /_/    \_\__,_|\__\___/|______|______|_|  |_|
+                                              
+""", "green"))
 
 def main():
     # Create an instance of the LLM
@@ -26,6 +39,9 @@ def main():
     print(colored(f"Results: {results}", "green"))
 
 if __name__ == "__main__":
+    # Print the ASCII art
+    print_ascii_art()
+
     # Set logging level to info
     logging.basicConfig(level=logging.INFO)
 

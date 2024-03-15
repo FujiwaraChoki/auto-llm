@@ -89,7 +89,7 @@ class LLM:
                 "command3"
             ]
 
-            Each command has a LIMIT of One Line, and should MAXIMUM be 100 characters long.
+            If you need to generate a script, make sure to make it multiple commands, and not a single command.
 
             If access to the file system is required, only work in the current user's directory.
 
