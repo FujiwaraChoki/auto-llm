@@ -8,8 +8,7 @@ The project is divided into two parts: the LLM and the automation. The LLM is re
 
 ## How to use
 
-> [!Note]
-> <sup><strong>Please use Powershell so that the Automation part of Auto-LLM can run the commands.</strong></sup>
+> [!Note] > <sup><strong>Please use Powershell so that the Automation part of Auto-LLM can run the commands.</strong></sup>
 
 First, please export the following environment variables:
 
@@ -32,6 +31,18 @@ pip3 install -r requirements.txt
 python3 src/main.py
 ```
 
+## FAQ
+
+### I can't install `playsound`!
+
+If you are having trouble installing `playsound`, make sure you have the latest version of the `wheel` package. You can install it by running the following command:
+
+```bash
+pip3 install -U wheel
+```
+
+Now you should be able to install `playsound` without any problems.
+
 ## How to contribute
 
 If you want to contribute to this project, please open an issue or a pull request. We are open to new ideas and suggestions.
@@ -39,3 +50,7 @@ If you want to contribute to this project, please open an issue or a pull reques
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```
+
+```

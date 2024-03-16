@@ -2,6 +2,7 @@ import json
 import logging
 
 from termcolor import colored
+from playsound import playsound
 
 try:
     from classes.LLM import LLM

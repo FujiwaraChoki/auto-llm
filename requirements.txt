@@ -4,3 +4,6 @@ PyExecJS
 undetected_chromedriver
 platformdirs
 Brotli
+edge-tts
+wheel
+playsound
