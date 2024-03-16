@@ -47,7 +47,7 @@ def main() -> None:
         print(colored("Commands: 'exit', 'help'", "green"))
         return
 
-    # Infer the commands
+    # Generate the commands
     commands = llm.infer(user_task)
 
     print(colored(f"Commands: {commands}", "green"))
