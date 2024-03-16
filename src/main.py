@@ -1,6 +1,9 @@
 import json
+import asyncio
 import logging
+import edge_tts
 
+from uuid import uuid4
 from termcolor import colored
 from playsound import playsound
 
@@ -24,7 +27,14 @@ def print_ascii_art():
     
 PREVIOUS_COMMANDS = []
 
-def main():
+async def say(text: str) -> None:
+    communicate = edge_tts.Communicate(text, "en-GB-SoniaNeural")
+    filename = f"assets/{str(uuid4())}.mp3"
+    await communicate.save(filename)
+
+    playsound(filename)
+
+def main() -> None:
     # Create an instance of the LLM
     llm = LLM(model="gpt-3.5-turbo")
 
@@ -51,6 +61,16 @@ def main():
 
     # Run the commands
     results = automation.run_commands(commands)
+
+    explanation = llm.explain_commands(commands)
+
+    try:
+        loop = asyncio.get_event_loop_policy().new_event_loop()
+        loop.run_until_complete(say(explanation))
+    except Exception as e:
+        logging.error(colored(f"Error: {e}", "red"))
+    finally:
+        loop.close()
 
     print(colored(f"Results: {results}", "green"))
 

@@ -119,3 +119,24 @@ class LLM:
         })
 
         return commands
+
+    def explain_commands(self, commands: List[str]) -> str:
+        """
+        Method to explain the commands to the user.
+
+        Args:
+            commands (List[str]): The list of commands that are to be explained to the user.
+
+        Returns:
+            str: The explanation of the commands.
+        """
+        return self.client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"Please explain what these commands do in Powershell, and how they affect my computer. Do not make an introduction and get straight to explaining. You must NOT mention the commands, merely explain them:\n{commands}"
+                }
+            ],
+            provider=FreeGpt
+        ).choices[0].message.content
