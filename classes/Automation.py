@@ -44,6 +44,5 @@ class Automation:
                 logging.error(colored(f"Error: {result.stderr}\nTrying again...", "red"))
 
         # Return the result
-        return result.stdout or result.stderr
-    
+        return f"Return code: {ret_code}\n{result.stdout}"
     
