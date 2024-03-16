@@ -15,40 +15,9 @@ class Automation:
         Returns:
             None
         """
-        pass
-
-    def run(self, command: str) -> dict:
-        """
-        Method to run the command.
-
-        Args:
-            command (str): The command that is to be run.
-
-        Returns:
-            dict: The result of the command.
-        """
-
-        logging.info(f"Running the command: {command}")
-
-        # Send the command to the powershell
-        result = sp.run(command, shell=True, text=True, capture_output=True)
-
-        # Capture output and error streams
-        stdout, stderr = result.stdout, result.stderr
-
-        # Check if the command was successful
-        if not stderr:
-            return {
-                "success": True,
-                "message": stdout
-            }
-        else:
-            return {
-                "success": False,
-                "message": stderr
-            }
+        self.script_name = "auto_llm.ps1"
     
-    def run_commands(self, commands: list) -> list:
+    def run_commands(self, commands: list) -> str:
         """
         Method to run the list of commands.
 
@@ -56,18 +25,17 @@ class Automation:
             commands (list): The list of commands that are to be run.
 
         Returns:
-            list: The list of results for the commands.
+            str: The result of running the commands.
         """
-        results = []
-        ok_dict = {}
+        # Write the commands to a PowerShell script
+        with open(self.script_name, "w") as f:
+            for command in commands:
+                f.write(f"{command.strip()}\n")
 
-        for command in commands:
-            result = self.run(command)
-            ok_dict["success"] = result["success"]
-            ok_dict["message"] = result["message"]
+        # Run the PowerShell script
+        result = sp.run(["powershell.exe", f".\\{self.script_name}"], capture_output=True, text=True)
 
-            results.append(result)
-        
-        return results
+        # Return the result
+        return result.stdout or result.stderr
     
     

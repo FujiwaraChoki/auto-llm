@@ -91,7 +91,7 @@ class LLM:
 
             If you need to generate a script, make sure to make it multiple commands, and not a single command.
 
-            If access to the file system is required, only work in the current user's directory.
+            If access to the file system is required, only work in the current working directory, so never mention a path that has a directory in it, always directly reference the files.
 
             NEVER use placeholders. Always use actual values, if you don't know them, use the Environment Variables that reference them on Windows.
 

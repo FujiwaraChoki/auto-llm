@@ -30,6 +30,12 @@ def main():
     # User task
     user_task = input(colored("[?] Please enter the user task: ", "cyan"))
 
+    if user_task == "exit":
+        raise KeyboardInterrupt
+    elif user_task == "help":
+        print(colored("Commands: 'exit', 'help'", "green"))
+        return
+
     # Infer the commands
     commands = llm.infer(user_task)
 
