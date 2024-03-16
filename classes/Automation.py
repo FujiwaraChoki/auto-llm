@@ -35,7 +35,7 @@ class Automation:
 
             # Run the PowerShell script
             result = sp.run(["powershell.exe", f".\\{self.script_name}"], capture_output=True, text=True)
-
+ 
             ret_code = result.returncode
 
             logging.info(f"Return code: {ret_code}")
