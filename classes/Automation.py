@@ -1,8 +1,7 @@
 import logging
 import subprocess as sp
 
-import subprocess as sp
-import logging
+from termcolor import colored
 
 class Automation:
     def __init__(self):
@@ -27,13 +26,22 @@ class Automation:
         Returns:
             str: The result of running the commands.
         """
-        # Write the commands to a PowerShell script
-        with open(self.script_name, "w") as f:
-            for command in commands:
-                f.write(f"{command.strip()}\n")
+        ret_code = 1
+        while ret_code != 0:
+            # Write the commands to a PowerShell script
+            with open(self.script_name, "w") as f:
+                for command in commands:
+                    f.write(f"{command.strip()}\n")
 
-        # Run the PowerShell script
-        result = sp.run(["powershell.exe", f".\\{self.script_name}"], capture_output=True, text=True)
+            # Run the PowerShell script
+            result = sp.run(["powershell.exe", f".\\{self.script_name}"], capture_output=True, text=True)
+
+            ret_code = result.returncode
+
+            logging.info(f"Return code: {ret_code}")
+
+            if ret_code != 0:
+                logging.error(colored(f"Error: {result.stderr}\nTrying again...", "red"))
 
         # Return the result
         return result.stdout or result.stderr
