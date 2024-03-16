@@ -8,8 +8,7 @@ The project is divided into two parts: the LLM and the automation. The LLM is re
 
 ## How to use
 
-> [!Note]
-> <sup><strong>Please use Powershell so that the Automation part of Auto-LLM can run the commands.</strong></sup>
+> [!Note] > <strong>Please use Powershell so that the Automation part of Auto-LLM can run the commands.</strong>
 
 First, please export the following environment variables:
 
