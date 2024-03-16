@@ -1,3 +1,4 @@
+import json
 import logging
 
 from termcolor import colored
@@ -19,6 +20,8 @@ def print_ascii_art():
  /_/    \_\__,_|\__\___/|______|______|_|  |_|
                                               
 """, "green"))
+    
+PREVIOUS_COMMANDS = []
 
 def main():
     # Create an instance of the LLM
@@ -29,6 +32,12 @@ def main():
 
     # Infer the commands
     commands = llm.infer(user_task)
+
+    print(colored(f"Commands: {commands}", "green"))
+
+    global PREVIOUS_COMMANDS
+    for command in commands:
+        PREVIOUS_COMMANDS.append(command)
 
     # Create an instance of the Automation class
     automation = Automation()
@@ -46,6 +55,13 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
 
     try:
-        main()
+        while True:
+            main()
+    except KeyboardInterrupt:
+        logging.info(colored("Exiting...", "green"))
+        with open("previous_commands.json", "w") as file:
+            json.dump(PREVIOUS_COMMANDS, file)
     except Exception as e:
         logging.error(colored(f"Error: {e}", "red"))
+        with open("previous_commands.json", "w") as file:
+            json.dump(PREVIOUS_COMMANDS, file)

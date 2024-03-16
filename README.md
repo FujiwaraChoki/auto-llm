@@ -8,11 +8,14 @@ The project is divided into two parts: the LLM and the automation. The LLM is re
 
 ## How to use
 
+> [!Note]
+> <sup><strong>Please use Powershell so that the Automation part of Auto-LLM can run the commands.</strong></sup>
+
 First, please export the following environment variables:
 
-```bash
+```powershell
 # So that the python script doesn't crash
-export PYTHONPATH=$(pwd)
+$env:PYTHONPATH=$(pwd)
 ```
 
 After that, you can run the following commands:

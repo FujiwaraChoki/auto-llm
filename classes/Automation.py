@@ -31,7 +31,7 @@ class Automation:
         logging.info(f"Running the command: {command}")
 
         # Send the command to the powershell
-        result = sp.run("powershell " + command, shell=True, text=True, capture_output=True)
+        result = sp.run(command, shell=True, text=True, capture_output=True)
 
         # Capture output and error streams
         stdout, stderr = result.stdout, result.stderr
