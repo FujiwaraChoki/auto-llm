@@ -26,10 +26,10 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # Install dependencies
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 # Run the main script
-python src/main.py
+python3 src/main.py
 ```
 
 ## How to contribute
